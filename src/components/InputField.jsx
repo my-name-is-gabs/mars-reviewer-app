@@ -1,16 +1,23 @@
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
 
-const InputField = ({ attribs, className }) => {
+const InputField = ({ attribs, className, onBlur, onChange }) => {
   return (
     <>
-      <input {...attribs} className={className} />
+      <input
+        {...attribs}
+        className={className}
+        onBlur={onBlur}
+        onChange={onChange}
+      />
     </>
-  );
-};
+  )
+}
 
 InputField.propTypes = {
   attribs: PropTypes.object,
   className: PropTypes.string,
-};
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+}
 
-export default InputField;
+export default InputField

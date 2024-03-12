@@ -1,5 +1,6 @@
 {
   "editconfig": true,
-  "arrowParens": "always",
-  "singleQuote": true
+  "arrowParens": "avoid",
+  "singleQuote": true,
+  "semi": false
 }
