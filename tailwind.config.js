@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sourceSans: ['SourceSans3'],
+        sourceSans: ['Source Sans 3'],
         poppins: ['Poppins'],
       },
       textColor: {
@@ -25,7 +25,10 @@ export default {
         info: '#3B63B8',
         success: '#0F6401',
       },
+      fill: {
+        primary: '#572f77',
+      },
     },
   },
   plugins: [],
-};
+}

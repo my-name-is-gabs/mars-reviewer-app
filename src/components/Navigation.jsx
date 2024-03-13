@@ -1,23 +1,23 @@
-import { NavLink, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-import LogoutIcon from '@mui/icons-material/Logout';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import HomeIcon from '@mui/icons-material/Home';
+import { NavLink, useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
+import LogoutIcon from '@mui/icons-material/Logout'
+import DashboardIcon from '@mui/icons-material/Dashboard'
+import HomeIcon from '@mui/icons-material/Home'
 
 const Navigation = () => {
-  const location = useLocation();
-  const [isVisible, setIsVisible] = useState(true);
+  const location = useLocation()
+  const [isVisible, setIsVisible] = useState(true)
 
   useEffect(() => {
     if (location.pathname === '/' || location.pathname === '/register') {
-      setIsVisible(false);
+      setIsVisible(false)
     }
-  }, [location]);
+  }, [location])
 
   return (
     <nav
-      className={`relative top-0 left-0 py-5 mb-7 w-11/12 mx-auto  ${
+      className={`relative top-0 left-0 py-5 mb-7 w-11/12 mx-auto z-10  ${
         isVisible ? 'flex' : 'hidden'
       }  items-center justify-between`}
     >
@@ -60,7 +60,7 @@ const Navigation = () => {
         </li>
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default Navigation;
+export default Navigation

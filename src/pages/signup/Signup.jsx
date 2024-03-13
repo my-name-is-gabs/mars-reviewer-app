@@ -1,6 +1,5 @@
 import { Container, Stack } from '@mui/material'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import InputField from '../../components/InputField'
 import Button from '../../components/Button'
