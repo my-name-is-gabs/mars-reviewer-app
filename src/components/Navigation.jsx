@@ -11,8 +11,8 @@ const Navigation = () => {
 
   useEffect(() => {
     if (location.pathname === '/' || location.pathname === '/register') {
-      setIsVisible(false)
-    }
+      return setIsVisible(false)
+    } else return setIsVisible(true)
   }, [location])
 
   return (
@@ -28,7 +28,7 @@ const Navigation = () => {
       <ul className="flex justify-between items-center gap-7 list-none">
         <li>
           <NavLink
-            to="#"
+            to="/mars-reviewer"
             className="inline-flex items-center hover:text-primary"
           >
             <HomeIcon /> Home

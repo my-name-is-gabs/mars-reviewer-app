@@ -6,6 +6,7 @@ import Button from '../../components/Button'
 import axiosApi from '../../api/axiosApi'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
+import { AUTH_TYPE } from '../../constant'
 
 const validateSchema = Yup.object({
   username: Yup.string()
@@ -33,13 +34,16 @@ const Signup = () => {
 
   const onSubmit = async values => {
     try {
-      const data = await axiosApi.post('register/', JSON.stringify(values))
-      if (data.status === 201) {
-        toast.success('Account was created successfully')
-        navigate('/home')
-      }
+      const { data } = await axiosApi.post('register/', JSON.stringify(values))
+      toast.success('Account was created successfully')
+      axiosApi.defaults.headers['Authorization'] =
+        AUTH_TYPE + data.user.access_token
+
+      localStorage.setItem('authorize', data.user.status)
+
+      return navigate('/mars-reviewer')
     } catch (error) {
-      toast.error('Error was encountered when creating the account')
+      toast.error(error.response.data.message)
     }
   }
 

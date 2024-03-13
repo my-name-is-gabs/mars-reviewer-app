@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import Button from './Button';
+import PropTypes from 'prop-types'
+import Button from './Button'
 
 const Card = ({ children }) => {
   return (
@@ -8,11 +8,11 @@ const Card = ({ children }) => {
         {children}
       </Button>
     </>
-  );
-};
+  )
+}
 
 Card.propTypes = {
-  children: PropTypes.element.isRequired,
-};
+  children: PropTypes.any.isRequired,
+}
 
-export default Card;
+export default Card

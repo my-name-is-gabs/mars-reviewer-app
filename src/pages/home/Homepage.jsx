@@ -1,8 +1,8 @@
-import React from 'react';
-import Container from '@mui/material/Container';
-import Card from '../../components/Card';
-import Button from '../../components/Button';
-import AddIcon from '@mui/icons-material/Add';
+import React from 'react'
+import Container from '@mui/material/Container'
+import Card from '../../components/Card'
+import Button from '../../components/Button'
+import AddIcon from '@mui/icons-material/Add'
 
 const Homepage = () => {
   return (
@@ -18,7 +18,7 @@ const Homepage = () => {
         </div>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default Homepage;
+export default Homepage

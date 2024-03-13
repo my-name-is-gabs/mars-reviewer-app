@@ -1,7 +1,7 @@
 const LoadingPage = () => {
   return (
     <>
-      <div className="z-50 min-h-full h-full w-full fixed top-0 bg-white flex flex-col justify-center items-center">
+      <div className="z-50 min-h-full h-full w-full fixed top-0 left-0 bg-white flex flex-col justify-center items-center">
         <h1 className="text-4xl mb-5 font-sourceSans font-semibold text-slate-600">
           Loading please wait ...
         </h1>
@@ -12,7 +12,7 @@ const LoadingPage = () => {
         <div role="status">
           <svg
             aria-hidden="true"
-            class="inline w-20 h-20 text-gray-200 animate-spin dark:text-gray-300 fill-primary"
+            className="inline w-20 h-20 text-gray-200 animate-spin dark:text-gray-300 fill-primary"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ const LoadingPage = () => {
               fill="currentFill"
             />
           </svg>
-          <span class="sr-only">Loading...</span>
+          <span className="sr-only">Loading...</span>
         </div>
       </div>
     </>

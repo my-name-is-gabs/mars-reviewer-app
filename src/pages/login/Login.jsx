@@ -1,9 +1,46 @@
-import { Container, Stack } from '@mui/material';
-import Button from '../../components/Button';
-import InputField from '../../components/InputField';
-import { NavLink } from 'react-router-dom';
+import { Container, Stack } from '@mui/material'
+import Button from '../../components/Button'
+import InputField from '../../components/InputField'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { toast } from 'react-toastify'
+import axiosApi from '../../api/axiosApi'
+import { AUTH_TYPE } from '../../constant'
+
+const validateSchema = Yup.object({
+  username: Yup.string().required('Username is required'),
+  password: Yup.string().required('Password is required'),
+})
 
 const Login = () => {
+  const navigate = useNavigate()
+
+  const onSubmit = async values => {
+    try {
+      const { data } = await axiosApi.post('login/', JSON.stringify(values))
+      toast.success('Login successfully')
+
+      axiosApi.defaults.headers['Authorization'] =
+        AUTH_TYPE + data.user.access_token
+
+      localStorage.setItem('authorize', data.user.status)
+
+      return navigate('/mars-reviewer')
+    } catch (error) {
+      toast.error(error.response.data.message)
+    }
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validationSchema: validateSchema,
+    onSubmit: onSubmit,
+  })
+
   return (
     <>
       <header className="relative top-0 left-0 mx-auto py-4 flex items-center gap-4">
@@ -46,6 +83,7 @@ const Login = () => {
           autoComplete="off"
           className="flex flex-col lg:w-1/3 w-full lg:px-0 px-7"
           method="post"
+          onSubmit={formik.handleSubmit}
         >
           <h1 className="font-medium text-3xl mb-3">Sign In</h1>
 
@@ -57,6 +95,8 @@ const Login = () => {
                 placeholder: 'Enter username',
               }}
               className="inputField"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
 
             <InputField
@@ -66,10 +106,12 @@ const Login = () => {
                 placeholder: 'Enter Password',
               }}
               className="inputField"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </Stack>
           <Button
-            attribs={{ type: 'button' }}
+            attribs={{ type: 'submit' }}
             className="mt-10 login-and-register-btn"
             testid="login_test_id"
           >
@@ -78,7 +120,7 @@ const Login = () => {
         </form>
       </Container>
     </>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login
