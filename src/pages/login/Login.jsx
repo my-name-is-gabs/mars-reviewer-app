@@ -6,7 +6,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { toast } from 'react-toastify'
 import axiosApi from '../../api/axiosApi'
-import { AUTH_TYPE } from '../../constant'
+import { AUTH_TYPE, SECRET_KEY } from '../../constant'
+import { encrypt } from 'n-krypta'
 
 const validateSchema = Yup.object({
   username: Yup.string().required('Username is required'),
@@ -24,6 +25,9 @@ const Login = () => {
       axiosApi.defaults.headers['Authorization'] =
         AUTH_TYPE + data.user.access_token
 
+      const encryptData = encrypt(data.user, SECRET_KEY)
+
+      localStorage.setItem('encrypted_data', encryptData)
       localStorage.setItem('authorize', data.user.status)
 
       return navigate('/mars-reviewer')
@@ -109,14 +113,21 @@ const Login = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
+            <Button
+              attribs={{ type: 'submit' }}
+              className="mt-4 login-and-register-btn"
+              testid="login_test_id"
+            >
+              Login
+            </Button>
+
+            <div className="mt-5 text-center lg:hidden block">
+              Don't have an account?{' '}
+              <NavLink to="/register" className="text-violet-600 font-semibold">
+                Register here!
+              </NavLink>
+            </div>
           </Stack>
-          <Button
-            attribs={{ type: 'submit' }}
-            className="mt-10 login-and-register-btn"
-            testid="login_test_id"
-          >
-            Login
-          </Button>
         </form>
       </Container>
     </>

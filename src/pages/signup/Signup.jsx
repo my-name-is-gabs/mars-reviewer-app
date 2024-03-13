@@ -6,7 +6,8 @@ import Button from '../../components/Button'
 import axiosApi from '../../api/axiosApi'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { AUTH_TYPE } from '../../constant'
+import { AUTH_TYPE, SECRET_KEY } from '../../constant'
+import { encrypt } from 'n-krypta'
 
 const validateSchema = Yup.object({
   username: Yup.string()
@@ -36,9 +37,13 @@ const Signup = () => {
     try {
       const { data } = await axiosApi.post('register/', JSON.stringify(values))
       toast.success('Account was created successfully')
+
       axiosApi.defaults.headers['Authorization'] =
         AUTH_TYPE + data.user.access_token
 
+      const encryptData = encrypt(data.user, SECRET_KEY)
+
+      localStorage.setItem('encrypted_data', encryptData)
       localStorage.setItem('authorize', data.user.status)
 
       return navigate('/mars-reviewer')
@@ -198,14 +203,21 @@ const Signup = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
+            <Button
+              attribs={{ type: 'submit' }}
+              className="mt-4 login-and-register-btn"
+              testid="login-signup-test-id"
+            >
+              Register
+            </Button>
+
+            <div className="mt-4 text-center">
+              Already have an account?{' '}
+              <NavLink to="/" className="text-violet-600 font-semibold">
+                Login here!
+              </NavLink>
+            </div>
           </Stack>
-          <Button
-            attribs={{ type: 'submit' }}
-            className="mt-10 login-and-register-btn"
-            testid="login-signup-test-id"
-          >
-            Register
-          </Button>
         </form>
       </Container>
     </>

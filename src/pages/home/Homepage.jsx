@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import Container from '@mui/material/Container'
 import Card from '../../components/Card'
 import Button from '../../components/Button'
 import AddIcon from '@mui/icons-material/Add'
+import { decrypt } from 'n-krypta'
+import { SECRET_KEY } from '../../constant'
 
 const Homepage = () => {
+  const encrypted = localStorage.getItem('encrypted_data')
+
+  const user = useMemo(() => decrypt(encrypted, SECRET_KEY), [])
+
   return (
     <>
       <Container>

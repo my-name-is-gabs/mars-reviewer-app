@@ -1,5 +1,5 @@
-import { BASE_URL } from '../constant';
-import axios from 'axios';
+import { BASE_URL } from '../constant'
+import axios from 'axios'
 
 const axiosApi = axios.create({
   baseURL: BASE_URL,
@@ -10,6 +10,6 @@ const axiosApi = axios.create({
     'Content-Type': 'application/json',
     Accept: 'application/json',
   },
-});
+})
 
-export default axiosApi;
+export default axiosApi
